@@ -1,6 +1,7 @@
 "use client";
 
 import { useRemoveProductMutation } from "@/store/features/productApiSlice";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 type ProductCardProps = {
@@ -24,6 +25,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
 
   const [deleteProduct] = useRemoveProductMutation();
 
+  const router = useRouter()
+
   const handleDelete = async (id: number) => {
     console.log("Deleting product with ID:", id);
     try {
@@ -34,6 +37,13 @@ const ProductCard: React.FC<ProductCardProps> = ({
       alert("Something went wrong");
     }
   };
+
+  const handleUpdate = async(id:number) => {
+    console.log("updatinggggg----",id);
+
+    router.push(`/add-product?id=${id}&mode=edit`)
+    
+  }
   return (
     <>
       <div className="bg-gray-400 shadow-md rounded-xl p-5 w-full max-w-sm hover:shadow-lg transition duration-300">
@@ -51,7 +61,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
           <button className="border p-2" onClick={() => setIsOpen(true)}>
             View
           </button>
-          <button className="border p-2">Edit</button>
+          <button className="border p-2" onClick={() => handleUpdate(id)}>Edit</button>
           <button className="border p-2" onClick={() => handleDelete(id)}>
             Delete
           </button>

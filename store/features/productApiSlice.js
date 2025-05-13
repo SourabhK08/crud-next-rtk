@@ -28,8 +28,21 @@ export  const productApiSlice = rootApiSlice.injectEndpoints({
                   
                 }
             }
+        }),
+        updateProductById:builder.mutation({
+            query:({productId,updatedProduct}) => ({
+                url:`/products/${productId}`,
+                method:'PUT',
+                body:updatedProduct
+            })
+        }),
+        getProductById: builder.mutation({
+            query: productId =>({
+                url:`/products/${productId}`,
+                method:'GET'
+            })
         })
     })
 })
 
-export const {useAddProductMutation,useGetProductListQuery,useRemoveProductMutation} = productApiSlice
+export const {useAddProductMutation,useGetProductListQuery,useRemoveProductMutation,useUpdateProductByIdMutation,useGetProductByIdMutation} = productApiSlice

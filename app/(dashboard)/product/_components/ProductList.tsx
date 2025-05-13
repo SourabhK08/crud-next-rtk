@@ -6,7 +6,7 @@ import ProductCard from "@/components/ProductCard";
 import { useRouter } from "next/navigation";
 
 function ProductList() {
-  const { data: productList, isLoading, error } = useGetProductListQuery();
+  const { data: productList, isLoading, error } = useGetProductListQuery({});
   const router = useRouter();
   console.log("productList", productList);
 
